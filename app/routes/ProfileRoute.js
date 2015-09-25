@@ -14,6 +14,7 @@ export default class ProfileRoute extends React.Component {
     saveProfile: PropTypes.func.isRequired
   }
 
+  // this.props.saveProfile で action を呼び出せる
   saveProfile = profile => this.props.saveProfile(profile)
 
   render() {

@@ -52,6 +52,12 @@ export default (state = initialState, action) => {
     case SAVE_PROFILE:
     case SAVE_PROFILE_SUCCESS:
     case FETCH_PROFILE_SUCCESS:
+
+      // 以下と同じ。くっつけてるだけ。
+      // return _extends({}, state, {
+      //   profile: _extends({}, state.profile, action.user),
+      //   error: null
+      // });
       return {
         ...state,
         profile: { ...state.profile, ...action.user },

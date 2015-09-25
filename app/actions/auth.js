@@ -22,6 +22,7 @@ import getHeaders from '../utils/getHeaders.js';
 
 const baseUrl = 'http://localhost:1337';
 
+// cookieセットしてるだけ
 function saveAuthToken(token) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
@@ -36,6 +37,7 @@ function saveAuthToken(token) {
 export function signup(email, password, router) {
   return async (dispatch) => {
     try {
+      // このエンドポイントが現状存在しないため、ここの下のtry内の処理が走ることはない
       const { data: { token, user } } = await axios.post(`${baseUrl}/signup`, {
         email,
         password
@@ -46,8 +48,10 @@ export function signup(email, password, router) {
       dispatch({ type: LOGIN_SUCCESS, token });
       dispatch({ type: FETCH_PROFILE_SUCCESS, user });
       dispatch({ type: SIGNUP_SUCCESS });
+
       // TODO: don't do it here.
       router.transitionTo('/profile');
+
     } catch (error) {
       dispatch({
         type: SIGNUP_FAILURE,
@@ -104,8 +108,19 @@ export function fetchProfile() {
       if (!token) { return; }
 
       const headers = getHeaders(token);
+
+      // 以下の様なデータが返ってくる。
+      // {
+      //   "id": 1,
+      //   "email": "bestwagner@nimon.com",
+      //   "password": "fugiat",
+      //   "firstname": "Helene",
+      //   "lastname": "Sawyer"
+      // }
       const user = (await axios.get(`${baseUrl}/profile`, { headers })).data;
+
       dispatch({ type: FETCH_PROFILE_SUCCESS, user });
+
     } catch (error) {
       dispatch({ type: FETCH_PROFILE_FAILURE, error });
     }
@@ -121,6 +136,7 @@ export function saveProfile(user) {
     try {
       const headers = getHeaders(token);
 
+      // jsonファイルを更新した後の、userの情報が返ってくる
       user = (await axios.put(
         `${baseUrl}/profile`,
          user,
@@ -128,6 +144,7 @@ export function saveProfile(user) {
       ).data;
 
       dispatch({ type: SAVE_PROFILE_SUCCESS, user });
+
     } catch (error) {
       dispatch({
         type: SAVE_PROFILE_FAILURE,

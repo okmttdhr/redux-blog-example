@@ -58,23 +58,34 @@ app.post('/login', (req, res) => {
   }
 });
 
+// プロフィールをGET
 app.get('/profile', (req, res) => {
   try {
     const token = extractToken(req.headers.authorization);
     const decode = jwtToken.decode(token);
     const { email } = decode;
+
+    // data.jsonのusersを読み込んでいる
     fs.readFile(jsonPath, {
       encoding: 'utf-8'
     }, (error, db) => {
+
+      // data.jsonのusersをオブジェクトとして取り出している
       const users  = (JSON.parse(db)).users;
+
+      // emailが一致するものをlodashでfind
       const user = _.find(users, (user) => user.email === email);
+
       res.send(user);
+
     });
+
   } catch (error) {
     res.sendStatus(401);
   }
 });
 
+// プロフィール更新
 app.put('/profile', (req, res) => {
   try {
     const token = extractToken(req.headers.authorization);
@@ -96,15 +107,19 @@ app.put('/profile', (req, res) => {
         return user;
       });
 
+      // ユーザーがいなければ成立しない => エラーを返す
       if (!editedUser) res.sendStatus(404);
 
+      // userの箇所だけ更新してやる
       json.users = users;
 
+      // jsonファイルを更新
       fs.writeFile(jsonPath, JSON.stringify(json, null, '  '), err => {
         if (err) return res.sendStatus(500);
 
         res.send(editedUser);
       });
+
     });
   } catch (error) {
     res.sendStatus(401);
