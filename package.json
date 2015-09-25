@@ -18,7 +18,7 @@
     "url": "git@github.com:GetExpert/redux-blog-example.git"
   },
   "scripts": {
-    "precommit": "npm test",
+    "_precommit": "npm test",
     "prepush": "npm test",
     "clean": "rm -rf public app/server-bundle.js",
     "build:server": "BUNDLE=server NODE_ENV=production webpack --config ./webpack/prod.config.babel.js",
