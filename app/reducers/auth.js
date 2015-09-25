@@ -4,6 +4,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
 
+  // 現時点で、SIGNUP_SUCCESSの機能は実装されていない
   SIGNUP_FAILURE,
 
   LOGOUT,
@@ -20,6 +21,10 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+
+  console.log('auth state');
+  console.log(state);
+
   switch (action.type) {
     case ROUTER_STATE_CHANGE:
       return {

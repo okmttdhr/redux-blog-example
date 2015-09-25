@@ -5,6 +5,10 @@ import {
 } from '../constants/actions';
 
 export default (state = { list: [], items: {} }, action) => {
+
+  console.log('posts state');
+  console.log(state);
+
   switch (action.type) {
     case FETCH_POSTS_SUCCESS:
       const list = action.posts.map(item => item.id);

@@ -26,9 +26,12 @@ const template = _.template(templateSource);
 
 app.use((req, res, next) => {
   const location = new Location(req.path, req.query);
+
+  // cookiesからtokenを取得、stateにセット
   const token = req.cookies.token;
   const store = createRedux({ auth: { token } });
 
+  // ルーター
   Router.run(routes(store, false), location, async (err, state, transition) => {
     if (err) { return next(err); }
 
@@ -40,6 +43,7 @@ app.use((req, res, next) => {
 
     await fillStore(store, state, state.components);
 
+    // Providerでredux化
     const html = React.renderToString(
       <Provider store={store}>
         {() => <Router {...state} />}

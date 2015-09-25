@@ -36,42 +36,42 @@ export default class Signup extends React.Component {
     const { email, password } = this.state;
 
     return (
-        <div styleName="wrapper">
-          <div styleName="title">Sign up</div>
+      <div styleName="wrapper">
+        <div styleName="title">Sign up</div>
 
-          {error
-            ? <div>{error.message}</div>
-            : null}
+        {error
+          ? <div>{error.message}</div>
+          : null}
 
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="email">Email</label>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="email">Email</label>
 
-            <input
-              styleName="input"
-              value={email}
-              onChange={this.handleChange('email')}
-              id="email"
-              type="email"
-              placeholder="Email"
-              required
-            />
+          <input
+            styleName="input"
+            value={email}
+            onChange={this.handleChange('email')}
+            id="email"
+            type="email"
+            placeholder="Email"
+            required
+          />
 
-            <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password</label>
 
-            <input
-              styleName="input"
-              value={password}
-              onChange={this.handleChange('password')}
-              id="password"
-              type="password"
-              placeholder="Password"
-              required
-            />
+          <input
+            styleName="input"
+            value={password}
+            onChange={this.handleChange('password')}
+            id="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
 
-            <button
-              styleName="btn"
-              type="submit"
-            >
+          <button
+            styleName="btn"
+            type="submit"
+          >
             Sign me up
           </button>
         </form>

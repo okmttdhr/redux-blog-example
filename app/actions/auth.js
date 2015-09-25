@@ -32,6 +32,7 @@ function saveAuthToken(token) {
   });
 }
 
+// 現時点で、SIGNUP_SUCCESSの機能は実装されていない
 export function signup(email, password, router) {
   return async (dispatch) => {
     try {

@@ -38,6 +38,7 @@ function walk(routes, cb) {
   return routes;
 }
 
+// #todo 何かしらtransitionの処理？
 export default (store, client) => {
   return walk(Route.createRouteFromReactElement(routes), route => {
     route.onEnter = (nextState, transition) => {
