@@ -21,8 +21,28 @@ export default (state = { list: [], items: {} }, action) => {
       return { list, items };
 
     case SAVE_POST_SUCCESS:
+
+    // 特定のポストを取得
     case FETCH_POST_SUCCESS:
       return {
+
+        // items: {... は以下と同じ。
+        // function _defineProperty(obj, key, value) {
+        //   if (key in obj) {
+        //     Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+        //   } else {
+        //     obj[key] = value;
+        //   }
+        //   return obj;
+        // }
+        //
+        // items: _extends({},
+        //   state.items,
+        //   _defineProperty({},
+        //     action.post.id,
+        //     action.post
+        //   )
+        // ),
         items: {
           ...state.items,
           [action.post.id]: action.post

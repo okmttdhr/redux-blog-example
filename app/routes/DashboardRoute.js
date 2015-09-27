@@ -18,6 +18,7 @@ export default class DashboardRoute extends React.Component {
     savePost: PropTypes.func.isRequired
   }
 
+  // 最初に必ず呼ばれる
   static fillStore(redux) {
     return redux.dispatch(fetchPosts());
   }

@@ -38,17 +38,32 @@ function walk(routes, cb) {
   return routes;
 }
 
-// #todo 何かしらtransitionの処理？
+// app/server.js
+// app/Root.js
+// の2つで実行。
+  // store には store=createRedux(someObject) がはいる。
+  // app/Root.js でのみ client が true で渡る。
 export default (store, client) => {
+
+  // Route.createRouteFromReactElementはこれらしいがよくわからない
+  // https://github.com/rackt/react-router/blob/713c2b0d2f1e0dae06456e0f74a34d32a175d7a5/modules/RouteUtils.js#L29
   return walk(Route.createRouteFromReactElement(routes), route => {
+
     route.onEnter = (nextState, transition) => {
       const loggedIn = !!store.getState().auth.token;
 
       if (route.requireAuth && !loggedIn) {
+
+        // ログインしていなければリダイレクト
         transition.to(...redirectBackAfter('/login', nextState));
+
       } else if (client) {
+
+        // 読み込まれた時に必ず呼び出される
         fillStore(store, nextState, [route.component]);
+
       }
     };
+
   });
 };

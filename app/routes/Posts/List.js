@@ -13,6 +13,7 @@ export default class PostsList extends Component {
     posts: PropTypes.array
   }
 
+  // 最初に必ず呼ばれる
   static fillStore(redux) {
     return redux.dispatch(fetchPosts());
   }

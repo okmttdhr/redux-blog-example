@@ -23,11 +23,18 @@ export default class PostsEdit extends React.Component {
     }
   }
 
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+
+  // 特定のポストを更新
   handleSave = (post) => {
-    this.props.savePost(post);
+    const router = this.context.router;
+    this.props.savePost(post, router);
   }
 
   handlePublish = (post) => {
+    // _extends({}, post, { published: true }) と同じ
     this.props.savePost({ ...post, published: true });
   }
 
