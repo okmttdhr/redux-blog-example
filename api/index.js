@@ -1,7 +1,10 @@
 /* eslint-env node */
 import express from 'express';
 import bodyParser from 'body-parser';
+
+// JsonWebToken
 import jwt from 'express-jwt';
+
 import jsonServer from 'json-server';
 import config from './config';
 import jwtToken from 'jsonwebtoken';
@@ -126,6 +129,7 @@ app.put('/profile', (req, res) => {
   }
 });
 
+// data.jsonをサーバーとして使う
 app.use(jsonServer.router(jsonPath));
 
 app.listen(1337);

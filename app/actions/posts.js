@@ -17,8 +17,13 @@ const baseUrl = 'http://localhost:1337';
 export function fetchPosts() {
   return async (dispatch) => {
     try {
+
+      // よくはわからないけど、jsonServer使うこともないだろうし、完璧にわからなくてもいいだろう。
+      // 自分でやる時は、ちゃんと普通のエンドポイントつくってやろう
       const posts = (await axios.get(`${baseUrl}/posts`)).data;
+
       dispatch({ type: FETCH_POSTS_SUCCESS, posts });
+
     } catch (error) {
       dispatch({
         type: FETCH_POSTS_FAILURE,

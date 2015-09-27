@@ -10,6 +10,8 @@ export default (state = { list: [], items: {} }, action) => {
   console.log(state);
 
   switch (action.type) {
+
+    // ポストを取得、オブジェクト(state)をセット
     case FETCH_POSTS_SUCCESS:
       const list = action.posts.map(item => item.id);
       const items = {};
