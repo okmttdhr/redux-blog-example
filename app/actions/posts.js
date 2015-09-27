@@ -87,7 +87,9 @@ export function savePost(post, router) {
 
       dispatch({ type: SAVE_POST_SUCCESS, post });
 
-      router.transitionTo('/dashboard');
+      if (router) {
+        router.transitionTo('/dashboard');
+      }
 
     } catch (error) {
       dispatch({

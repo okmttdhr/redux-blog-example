@@ -34,8 +34,10 @@ export default class PostsEdit extends React.Component {
   }
 
   handlePublish = (post) => {
+    const router = this.context.router;
+
     // _extends({}, post, { published: true }) と同じ
-    this.props.savePost({ ...post, published: true });
+    this.props.savePost({ ...post, published: true }, router);
   }
 
   render() {
